@@ -21,14 +21,15 @@ const Button = styled.button`
   color: white;
   border: none;
   cursor: pointer;
+  line-height: 1;
 `;
 
 export default function Chips({
   data,
   changeSelected,
 }: {
-  data: pokemons,
-  changeSelected: (id: number) => void,
+  data: pokemons;
+  changeSelected: (id: number) => void;
 }) {
   return (
     <List>
