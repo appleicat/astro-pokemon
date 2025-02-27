@@ -10,9 +10,11 @@ const title = "Покемоны API";
 const pokemons = await getCollection("pokemons");
 const data = pokemons.map((pokemon) => pokemon.data);
 export type pokemons = typeof data;
+const prefetchLinks = data.map((pokemon) => pokemon.image);
 ---
 
 <Layout title={title} style="background-color: #131313; color: white;">
+  {prefetchLinks.map((link) => <link rel="prefetch" href={link} slot="head" />)}
   <div id="main">
     <div id="container">
       <Header title={title} />

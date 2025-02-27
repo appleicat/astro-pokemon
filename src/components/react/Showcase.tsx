@@ -26,7 +26,7 @@ const Title = styled.div`
 const Image = styled.img`
   height: 200px;
   object-position: center;
-  object-fit: cover;
+  object-fit: contain;
   image-rendering: pixelated;
 `;
 
