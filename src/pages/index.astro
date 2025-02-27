@@ -1,0 +1,41 @@
+---
+import { getCollection } from "astro:content";
+
+import Layout from "@/layouts/Layout.astro";
+import Header from "@/components/Header.astro";
+import Main from "@/components/react/Main";
+
+const title = "Покемоны API";
+
+const pokemons = await getCollection("pokemons");
+const data = pokemons.map((pokemon) => pokemon.data);
+export type pokemons = typeof data;
+---
+
+<Layout title={title} style="background-color: #131313; color: white;">
+  <div id="main">
+    <div id="container">
+      <Header title={title} />
+      <Main data={data} client:load />
+    </div>
+  </div>
+</Layout>
+
+<style>
+  #main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-top: 100px;
+    padding-bottom: 100px;
+  }
+  #container {
+    max-width: 1280px;
+    display: flex;
+    flex-direction: column;
+    gap: 54px;
+    padding-left: 150px;
+    padding-right: 150px;
+  }
+</style>

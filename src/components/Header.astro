@@ -1,0 +1,27 @@
+---
+import Title from "@/components/Title.astro";
+import clickSvg from "@/assets/click.svg";
+---
+
+<header>
+  <Title title={Astro.props.title} />
+  <div class="addition-info">
+    <img src={clickSvg.src} />
+    <div>Нажмите на<br />нужного Покемона</div>
+  </div>
+</header>
+
+<style>
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .addition-info {
+      font-weight: 600;
+      line-height: 1;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+  }
+</style>
