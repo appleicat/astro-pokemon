@@ -1,20 +1,21 @@
 import { defineCollection, z } from "astro:content";
+import axios from "axios";
 
 const pokemons = defineCollection({
   loader: async () => {
     try {
-      const pokemonsResponse = await fetch(
-        "https://pokeapi.co/api/v2/pokemon?limit=10"
-      );
-      const pokemonsJson = await pokemonsResponse.json();
-      const pokemonsMap = pokemonsJson.results.map(async (pokemon) => {
-        const pokemonResponse = await fetch(pokemon.url);
-        const pokemonJson = await pokemonResponse.json();
-        return pokemonJson;
-      });
-      const pokemons = await Promise.all(pokemonsMap);
+      const pokemons = await axios
+        .get("https://pokeapi.co/api/v2/pokemon?limit=10")
+        .then((response) => response.data);
 
-      return pokemons.map((pokemon) => ({
+      const pokemonsInfo = pokemons.results.map(
+        async (pokemon) =>
+          await axios.get(pokemon.url).then((response) => response.data)
+      );
+
+      const data = await Promise.all(pokemonsInfo);
+
+      return data.map((pokemon) => ({
         id: String(pokemon.id),
         name: pokemon.name,
         image: pokemon.sprites.front_shiny,
