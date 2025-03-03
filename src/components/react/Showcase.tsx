@@ -37,12 +37,24 @@ const Info = styled.div`
 `;
 
 export default function Showcase({ data }: { data: pokemons[number] }) {
+  const episodesString = (episodes: number) => {
+    const episodesString = episodes.toString().padStart(2, "0");
+    if (episodesString.at(-1) === "1") {
+      if (episodesString.at(-2) === "1") {
+        return `Снялся в ${episodes} сериях`;
+      }
+      return `Снялся в ${episodes} серии`;
+    }
+    return `Снялся в ${episodes} сериях`;
+  };
+
   return (
     <Main>
       <Container>
         <Title>{data.name}</Title>
         <Image src={data.image} />
         <Info>
+          <div>{episodesString(data.episodes)}</div>
           <div>Id: {data.id}</div>
           <div>height: {data.height}</div>
           <div>attack: {data.attack}</div>
